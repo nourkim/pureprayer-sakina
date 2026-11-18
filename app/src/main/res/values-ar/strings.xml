@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">سكينة</string>
+
+    <!-- Prayer names -->
+    <string name="prayer_fajr">الفجر</string>
+    <string name="prayer_sunrise">الشروق</string>
+    <string name="prayer_dhuhr">الظهر</string>
+    <string name="prayer_asr">العصر</string>
+    <string name="prayer_maghrib">المغرب</string>
+    <string name="prayer_isha">العشاء</string>
+
+    <!-- Main screen -->
+    <string name="next_prayer_label">الصلاة القادمة</string>
+    <string name="remaining_label">المتبقي</string>
+    <string name="cd_settings_button">الإعدادات</string>
+    <string name="syncing_times">جاري تحديث المواقيت…</string>
+    <string name="offline_cached">محفوظة محلياً</string>
+    <string name="offline_estimate">حساب محلي</string>
+    <string name="synced_online">محدّثة</string>
+    <string name="tomorrow_fajr_prefix">غداً • %1$s</string>
+
+    <!-- Notification -->
+    <string name="notif_channel_dew">تنبيه قطرة الندى الطبيعية</string>
+    <string name="notif_channel_birds">تنبيه تغريد الفجر والنسيم</string>
+    <string name="notif_channel_breeze">تنبيه نسيم الهدوء الطبيعي</string>
+    <string name="notif_channel_desc">تنبيه هادئ لمرة واحدة عند دخول وقت الصلاة بدون أذان</string>
+    <string name="notif_prayer_title">حان وقت صلاة %1$s</string>
+    <string name="notif_prayer_body">%1$s • %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="cd_back_button">رجوع</string>
+    <string name="section_alerts">التنبيه</string>
+    <string name="alerts_enabled_title">تنبيه بيب واحد</string>
+    <string name="alerts_enabled_desc">يصدر رنة واحدة هادئة في الخلفية بدون أذان</string>
+
+    <string name="section_region">المنطقة والوقت</string>
+    <string name="mode_gps">تلقائي GPS</string>
+    <string name="mode_manual">اختيار يدوي</string>
+    <string name="current_region_label">المنطقة الحالية</string>
+    <string name="timezone_label">المنطقة الزمنية</string>
+    <string name="sync_gps_now">تحديث عبر GPS</string>
+    <string name="choose_city">اختر المدينة</string>
+    <string name="search_city_hint">ابحث عن مدينة أو دولة…</string>
+    <string name="calc_method_label">طريقة الحساب</string>
+    <string name="gps_permission_needed">يرجى منح صلاحية الموقع لتحديد المنطقة الزمنية</string>
+
+    <string name="section_background">العمل في الخلفية</string>
+    <string name="bg_battery_title">استثناء تحسين البطارية</string>
+    <string name="bg_battery_granted">مسموح في الخلفية</string>
+    <string name="bg_battery_denied">مقيّد بالبطارية (اضغط للسماح)</string>
+    <string name="bg_exact_alarm_title">التنبيه الدقيق للوقت</string>
+    <string name="bg_exact_granted">التوقيت الدقيق مفعّل</string>
+    <string name="bg_exact_denied">يتطلب إذن المنبّه الدقيق</string>
+    <string name="bg_notif_title">الإشعارات</string>
+    <string name="bg_notif_granted">مفعّلة</string>
+    <string name="bg_notif_denied">اضغط لتفعيل الإشعارات</string>
+    <string name="bg_autostart_title">التشغيل مع إقلاع النظام (Autostart)</string>
+    <string name="bg_autostart_desc">اضغط لضبط إذن الإقلاع التلقائي واستمرار التنبيه بعد إعادة تشغيل الهاتف</string>
+    <string name="bg_footnote">يعمل بدون خدمات مستمرة في الخلفية لاستهلاك شبه معدوم للبطارية.</string>
+
+    <string name="section_language">اللغة</string>
+    <string name="lang_system">لغة الجهاز</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_en">English</string>
+    <string name="lang_fr">Français</string>
+    <string name="lang_tr">Türkçe</string>
+
+    <string name="section_themes">الثيمات الإسلامية</string>
+    <string name="theme_nur_fajr">نور الفجر (واضح)</string>
+    <string name="theme_rawdah_emerald">روضة زمردية (معتم)</string>
+    <string name="theme_lail_qadr">ليل القدر (معتم)</string>
+    <string name="theme_misk_alabaster">مسك ومرمر (واضح)</string>
+    <string name="theme_qubba_obsidian">قبة العقيق (معتم)</string>
+
+    <string name="section_tones">رنات الطبيعة الهادئة (3 ثوانٍ)</string>
+    <string name="chime_repeat_title">تكرار رنة التنبيه</string>
+    <string name="chime_repeat_desc">عدد مرات نغمة التنبيه عند دخول وقت الصلاة</string>
+    <string name="chime_repeat_1x">رنة واحدة (1×)</string>
+    <string name="chime_repeat_2x">رنتان (2×)</string>
+    <string name="chime_repeat_3x">3 رنات (3×)</string>
+    <string name="tone_dew_title">قطرة الندى الطبيعية</string>
+    <string name="tone_dew_desc">رنة 3 ثوانٍ لقطرة ماء بنغمة هادئة مستمدة من الطبيعة</string>
+    <string name="tone_birds_title">تغريد الفجر والنسيم</string>
+    <string name="tone_birds_desc">نغمة 3 ثوانٍ لطيفة مستوحاة من هدوء الفجر وأصوات الطيور</string>
+    <string name="tone_breeze_title">نسيم الخيزران والسكينة</string>
+    <string name="tone_breeze_desc">نغمة خشبية طبيعية دافئة تدوم 3 ثوانٍ مريحة للسمع والقلب</string>
+    <string name="cd_preview_tone">تجربة الرنة</string>
+
+    <!-- About section (kept in English as explicitly requested by the user) -->
+    <string name="section_about">About</string>
+    <string name="about_headline">Sakina Prayer Reminder</string>
+    <string name="about_credit">App idea by Nouri Hakim and developed with AI.</string>
+    <string name="about_summary">Built to stay whisper-light on battery and memory—delivering one calm chime per prayer from cached local times.</string>
+</resources>

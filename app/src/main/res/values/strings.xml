@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">Sakina</string>
+
+    <!-- Prayer names -->
+    <string name="prayer_fajr">Fajr</string>
+    <string name="prayer_sunrise">Sunrise</string>
+    <string name="prayer_dhuhr">Dhuhr</string>
+    <string name="prayer_asr">Asr</string>
+    <string name="prayer_maghrib">Maghrib</string>
+    <string name="prayer_isha">Isha</string>
+
+    <!-- Main screen -->
+    <string name="next_prayer_label">Next Prayer</string>
+    <string name="remaining_label">Remaining</string>
+    <string name="cd_settings_button">Settings</string>
+    <string name="syncing_times">Updating prayer times…</string>
+    <string name="offline_cached">Saved offline</string>
+    <string name="offline_estimate">Estimated locally</string>
+    <string name="synced_online">Synced</string>
+    <string name="tomorrow_fajr_prefix">Tomorrow • %1$s</string>
+
+    <!-- Notification -->
+    <string name="notif_channel_dew">Nature Dew Drop Alert</string>
+    <string name="notif_channel_birds">Dawn Birds &amp; Breeze Alert</string>
+    <string name="notif_channel_breeze">Forest Bamboo Breeze Alert</string>
+    <string name="notif_channel_desc">Calm single-chime prayer reminder without Adhan</string>
+    <string name="notif_prayer_title">Time for %1$s</string>
+    <string name="notif_prayer_body">%1$s • %2$s</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="cd_back_button">Back</string>
+    <string name="section_alerts">Prayer Alerts</string>
+    <string name="alerts_enabled_title">Single-Beep Reminder</string>
+    <string name="alerts_enabled_desc">Plays one gentle ring in the background without Adhan</string>
+
+    <string name="section_region">Region &amp; Timezone</string>
+    <string name="mode_gps">GPS Auto</string>
+    <string name="mode_manual">Manual</string>
+    <string name="current_region_label">Active Region</string>
+    <string name="timezone_label">Timezone</string>
+    <string name="sync_gps_now">Update via GPS</string>
+    <string name="choose_city">Choose City</string>
+    <string name="search_city_hint">Search city or country…</string>
+    <string name="calc_method_label">Calculation Method</string>
+    <string name="gps_permission_needed">Location permission needed to detect timezone</string>
+
+    <string name="section_background">Background Presence</string>
+    <string name="bg_battery_title">Unrestricted Battery</string>
+    <string name="bg_battery_granted">Allowed in background</string>
+    <string name="bg_battery_denied">Battery optimized (tap to allow)</string>
+    <string name="bg_exact_alarm_title">Exact Prayer Alarms</string>
+    <string name="bg_exact_granted">Exact timing active</string>
+    <string name="bg_exact_denied">Needs exact alarm permission</string>
+    <string name="bg_notif_title">Notifications</string>
+    <string name="bg_notif_granted">Enabled</string>
+    <string name="bg_notif_denied">Tap to allow notifications</string>
+    <string name="bg_autostart_title">Autostart on Boot</string>
+    <string name="bg_autostart_desc">Tap to manage autostart settings to ensure reminders survive device reboot</string>
+    <string name="bg_footnote">Uses zero continuous services—only lightweight system alarms.</string>
+
+    <string name="section_language">Language</string>
+    <string name="lang_system">Device Language</string>
+    <string name="lang_ar">العربية</string>
+    <string name="lang_en">English</string>
+    <string name="lang_fr">Français</string>
+    <string name="lang_tr">Türkçe</string>
+
+    <string name="section_themes">Islamic Themes</string>
+    <string name="theme_nur_fajr">Nur Al-Fajr (Light)</string>
+    <string name="theme_rawdah_emerald">Rawdah Emerald (Dark)</string>
+    <string name="theme_lail_qadr">Lail Al-Qadr (Dark)</string>
+    <string name="theme_misk_alabaster">Misk &amp; Alabaster (Light)</string>
+    <string name="theme_qubba_obsidian">Qubba Obsidian (Dark)</string>
+
+    <string name="section_tones">Calm Nature Chimes (3 Seconds)</string>
+    <string name="chime_repeat_title">Chime Repeat Count</string>
+    <string name="chime_repeat_desc">Number of times the gentle chime plays at prayer time</string>
+    <string name="chime_repeat_1x">1 Chime (1x)</string>
+    <string name="chime_repeat_2x">2 Chimes (2x)</string>
+    <string name="chime_repeat_3x">3 Chimes (3x)</string>
+    <string name="tone_dew_title">Nature Dew Drop</string>
+    <string name="tone_dew_desc">Soothing 3-second water drop with gentle resonance</string>
+    <string name="tone_birds_title">Dawn Birds &amp; Chime</string>
+    <string name="tone_birds_desc">Serene 3-second morning birdcall &amp; soft chime</string>
+    <string name="tone_breeze_title">Forest Bamboo Breeze</string>
+    <string name="tone_breeze_desc">Organic 3-second gentle wooden nature note</string>
+    <string name="cd_preview_tone">Preview tone</string>
+
+    <!-- About section (kept in English across all locales as requested) -->
+    <string name="section_about">About</string>
+    <string name="about_headline">Sakina Prayer Reminder</string>
+    <string name="about_credit">App idea by Nouri Hakim and developed with AI.</string>
+    <string name="about_summary">Built to stay whisper-light on battery and memory—delivering one calm chime per prayer from cached local times.</string>
+</resources>
