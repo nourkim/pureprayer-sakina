@@ -53,20 +53,20 @@
 
 # 🇬🇧 English
 
-## Why Sakina? • The Core Philosophy
+## Why Sakina? • The Philosophy of Serenity & Discretion
 
-In today's fast-paced, notification-saturated world, the call to prayer should be an invitation to **sanctuary and peace**, not another source of auditory stress.
+The traditional Call to Prayer (*Adhan*) is a sacred, universally revered spiritual summons. In Muslim-majority countries, it echoes majestically from minarets across every horizon.
 
-Most traditional prayer applications:
-- ❌ Shock users with sudden, blaring sirens or unexpected max-volume audio in quiet meetings, libraries, or family gatherings.
-- ❌ Clutter the sacred experience with intrusive banner ads, tracking SDKs, and bloated subscription paywalls.
-- ❌ Run persistent, aggressive foreground services and wakelocks in the background, quietly killing your phone's battery and causing excessive device heating.
+However, in our personal mobile daily lives, an unexpected, high-volume mobile alarm often creates unintended challenges:
+- 🏢 **In Professional Meetings & Academic Spaces**: In corporate boardrooms, open offices, classrooms, or libraries, a sudden, loud mobile alarm can startle colleagues and create awkward disruptions.
+- 🕌 **Inside the Mosque & During Prayer**: If a device's sound profile is not calibrated properly, an unsilenced phone ringing loudly during congregation can unintentionally disturb worshippers.
+- 🌍 **In Multicultural Environments & Western Countries**: For Muslims living in non-Muslim majority lands, unfamiliar or abrupt high-volume sounds in public transit, shared workspaces, or quiet venues can cause discomfort, hesitation, or tension.
 
-**Sakina (سكينة)** was crafted with a completely different mindset:
-> **"Prayer honored in serene tranquility."**
+**Sakina (سكينة)** was conceived to resolve this with dignity, mindfulness, and elegance:
+> **An intimate, gentle reminder honoring the arrival of prayer time wherever you are.**
 
-1. **Gentle, Mindful Chimes**: Instead of aggressive, loud alarms, Sakina notifies you with a **single, soft nature chime** (or repeats gently up to 3 times depending on your preference). Choose between morning dew, dawn breeze, or serene birdsong.
-2. **0% Background Battery Drain**: No persistent services, no continuous wakelocks, no memory leaks.
+1. **Discreet, Mindful Chimes**: Instead of jarring, loud alarms, Sakina uses **gentle natural soundscapes** (dawn breeze, morning songbirds, crystalline dew). It alerts you with a **single, soft chime**—or repeats gently up to 3 times according to your preference—reminding you of prayer without causing any disturbance.
+2. **0% Background Battery Drain**: No persistent background services, no continuous wakelocks, no memory leaks.
 3. **100% Offline & Private**: Calculates prayer times mathematically on-device using high-precision astronomical algorithms (Jean Meeus). Your location never leaves your phone.
 4. **Timeless Astrolabe Design**: Merges classical 10th-century Andalusian astronomical instruments with modern Apple Cupertino frosted-glass luxury horology at a buttery-smooth 120Hz.
 
@@ -152,17 +152,22 @@ To ensure atomic accuracy even during Android Deep Doze mode, Sakina requests on
 
 # 🇸🇦 العربية
 
-## لماذا تطبيق سكينة؟
+## لماذا تطبيق سكينة؟ • فلسفة السكينة والتذكير الهادئ
 
-في عالمنا اليوم المليء بالضجيج والتنبيهات المزعجة، يجب أن يكون النداء إلى الصلاة **واحة من السكينة والطمأنينة والخشوع**، وليس مصدراً للإزعاج أو التوتر.
+الأذان شعيرة إسلامية مباركة ونداء روحي جليل له مكانته العظيمة في قلوب المسلمين. وفي بلداننا الإسلامية، يصدح الأذان خاشعاً من المآذن ويُسمع في كل مكان بحمد الله.
 
-معظم تطبيقات الصلاة التقليدية تعاني من مشاكل شائعة:
-- ❌ تفاجئ المستخدم بأصوات صاخبة ونغمات حادة في أوقات غير مناسبة (الاجتماعات، قاعات الدراسة، أو أثناء نوم الأطفال).
-- ❌ ملأى بالإعلانات التجارية المزعجة والتتبع البرمجي الذي ينتهك الخصوصية.
-- ❌ تستهلك طاقة البطارية باستمرار من خلال تشغيل خدمات خلفية ثقيلة (Foreground Services) تؤدي إلى استنزاف الشحن وارتفاع حرارة الهاتف.
+لكن في واقع حياتنا اليومية عبر الهواتف الذكية، تنشأ تحديات ومواقف محرجة تتطلب حلولاً ذكية ومراعية:
+- 🏢 **في بيئات العمل والاجتماعات الرسمية**: قد يرن الهاتف فجأة بصوت أذان مرتفع جداً أثناء اجتماع عمل مهم أو في قاعة دراسة أو مكتبة، مما يشكل إرباكاً للمجتمعين واضطراباً في جو العمل.
+- 🕌 **في المسجد وأثناء إقامة الصلاة**: إذا لم يكن الهاتف مضبوطاً بدقة، فإن انطلاق صوت الهاتف المرتفع داخل المسجد أثناء صلاة الجماعة يشوش على المصلين ويقطع خشوعهم.
+- 🌍 **في بلاد الاغتراب والدول غير الإسلامية**: يعيش ملايين المسلمين في مجتمعات وبيئات غربية غير معتادة على سماع أصوات مرتفعة أو غير مألوفة في المواصلات العامة أو مقرات العمل، مما قد يسبب للمستخدم حرجاً أو ارتباكاً؛ وتطبيق "سكينة" يفي بالغرض تماماً ليمنحه وسيلة تنبيه آمنة وهادئة ومحترمة.
 
-**تطبيق "سكينة" (Sakina)** صُمم برؤية جديدة ومختلفة كلياً:
-> **"ذكر الله بهدوء وسكينة تليق بجلال الموقف."**
+من هنا ولدت فكرة **تطبيق "سكينة" (Sakina)**:
+> **تذكير شخصي لطيف وهادئ بدخول وقت الصلاة، يحفظ وقار اللحظة ويمنحك الطمأنينة أينما كنت.**
+
+1. **تنبيهات هادئة (1 إلى 3 رنات ناعمة)**: بدلاً من الأصوات الصاخبة المفاجئة، يعتمد التطبيق على نغمات طبيعية هادئة (نسيم الفجر، زقزقة الطيور، قطرات الندى) لتنبيهك بدخول الوقت برنة واحدة ناعمة، أو تكرارها بلطف حتى 3 مرات حسب اختيارك، لتستعد للصلاة بهدوء دون إرباك محيطك.
+2. **انعدام استهلاك البطارية تماماً (0% Battery Drain)**: لا توجد أي خدمات خلفية مستمرة أو مستنزفة للطاقة، ويعتمد فقط على منبهات النظام الدقيقة `AlarmManager`.
+3. **100% دون إنترنت وبخصوصية مطلقة**: حساب فلكي محلي عالي الدقة دون إرسال أي بايت واحد لخوادم خارجية.
+4. **ساعة فلكية ثلاثية الأبعاد بتصميم إسلامي فاخر**: مستوحاة من الأسطرلاب الأندلسي مع واجهة زجاجية عصرية (Cupertino Frosted Glass) بمعدل إطارات 120Hz.
 
 <br/>
 
@@ -212,17 +217,22 @@ To ensure atomic accuracy even during Android Deep Doze mode, Sakina requests on
 
 # 🇫🇷 Français
 
-## Pourquoi Sakina ?
+## Pourquoi Sakina ? • Philosophie de Sérénité et de Discrétion
 
-Dans un monde saturé de notifications bruyantes, l'appel à la prière doit être un moment de **paix, de recueillement et de sérénité**, et non une source de stress sonore.
+L'appel traditionnel à la prière (*Adhan*) est une tradition sacrée et profondément respectée. Dans les pays musulmans, il résonne naturellement et avec majesté depuis les minarets.
 
-La plupart des applications de prière traditionnelles :
-- ❌ Déclenchent des alarmes stridentes et soudaines qui perturbent les réunions, les cours ou le repos familial.
-- ❌ Sont polluées par des publicités intrusives et des traqueurs publicitaires.
-- ❌ Consomment énormément de batterie avec des services en arrière-plan permanents (Foreground Services) qui chauffent l'appareil.
+Cependant, dans nos usages mobiles quotidiens, des alertes téléphoniques inopinées à fort volume posent de réels défis :
+- 🏢 **En réunion professionnelle et en milieu académique** : Dans un bureau d'entreprise, une réunion formelle, une salle de classe ou une bibliothèque, une alerte sonore retentissante peut perturber l'assistance et créer un moment d'embarras.
+- 🕌 **À la mosquée et pendant la prière en commun** : Si un téléphone n'est pas rigoureusement silencieux, une sonnerie puissante interrompt le recueillement des fidèles en plein office.
+- 🌍 **Dans les pays non musulmans et contextes multiculturels** : Pour les musulmans vivant en Occident, une alerte forte ou inaccoutumée dans les transports publics ou les espaces partagés peut susciter l'incompréhension ou créer une gêne inutile. **Sakina** apporte une solution respectueuse, apaisée et parfaitement adaptée.
 
-**Sakina (سكينة)** a été pensée pour la pure sérénité :
-> **"La mémoire de la prière dans une quiétude absolue."**
+**Sakina (سكينة)** a été pensée avec une vision noble et mesurée :
+> **Un rappel intime, doux et discret pour honorer l'heure de la prière en toute quiétude.**
+
+1. **Carillons apaisants (1 à 3 sonneries douces)** : Au lieu de sonneries stridentes, Sakina utilise des ambiances sonores naturelles (brise de l'aube, chant d'oiseaux, gouttes de rosée). Une alerte unique ou répétée jusqu'à 3 fois vous informe avec bienveillance sans troubler votre entourage.
+2. **Zéro consommation de batterie (0% Battery Drain)** : Aucun service persistant en arrière-plan, aucun wakelock inutile.
+3. **100% Hors-Ligne & Respect de la vie privée** : Calcul astronomique de haute précision (Jean Meeus) directement sur l'appareil.
+4. **Horlogerie Astrolabe 3D & Design Cupertino** : Une esthétique d'exception en verre dépoli (Frosted Glass) animée avec une fluidité absolue à 120Hz.
 
 <br/>
 
