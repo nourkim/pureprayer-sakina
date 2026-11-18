@@ -18,7 +18,7 @@
 
 <br/>
 
-[📥 **Download Latest APK (v1.0)**](Sakina-v1.0-debug.apk) • [🎬 **Watch 3:4 Showcase Video**](Sakina_Showcase_3x4.mp4)
+[📥 **Download Latest APK (v1.0)**](Sakina-v1.0-debug.apk) • [🎬 **Watch Showcase on YouTube**](https://www.youtube.com/shorts/1jtjFadUEfA) • [🌐 **Live Showcase Website**](https://nourkim.github.io/pureprayer-sakina/)
 
 ---
 
@@ -262,9 +262,9 @@ Développée à 100% en **Kotlin** et **Jetpack Compose** natif (120Hz) :
 
 <div align="center">
 
-| Emerald Astrolabe (3+3 Layout) | Midnight Sky Astrolabe | Luxury Horology Banner |
+| Emerald Astrolabe (3+3 Layout) | Midnight Sky Astrolabe | Official Video Showcase |
 | :---: | :---: | :---: |
-| <img src="docs/assets/screenshot_emerald_main.jpg" width="280" alt="Emerald 3+3 Astrolabe" /> | <img src="docs/assets/screenshot_night_main.jpg" width="280" alt="Midnight Theme" /> | <img src="docs/assets/banner.jpg" width="280" alt="Luxury 3D Banner" /> |
+| <img src="docs/assets/screenshot_emerald_main.jpg" width="260" alt="Emerald 3+3 Astrolabe" /> | <img src="docs/assets/screenshot_night_main.jpg" width="260" alt="Midnight Theme" /> | <a href="https://www.youtube.com/shorts/1jtjFadUEfA" target="_blank"><img src="docs/assets/banner.jpg" width="260" alt="Watch Video on YouTube" /><br/>▶ **Watch on YouTube**</a> |
 
 </div>
 

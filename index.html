@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sakina • سكينة — The Mindful Islamic Prayer Timepiece</title>
+  <meta name="description" content="An ultra-lightweight, 100% offline Android prayer timepiece crafted with Jetpack Compose, featuring a 3D Astrolabe dial, gentle nature chimes, and zero battery drain." />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" />
+
+  <!-- Premium Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Readex+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-primary: #040908;
+      --bg-secondary: #081310;
+      --card-bg: rgba(13, 27, 23, 0.65);
+      --card-border: rgba(56, 178, 130, 0.22);
+      --card-hover: rgba(56, 178, 130, 0.35);
+      --gold: #f5c767;
+      --gold-bright: #ffe28a;
+      --gold-dark: #b88628;
+      --emerald: #38b282;
+      --emerald-glow: rgba(56, 178, 130, 0.45);
+      --emerald-subtle: rgba(56, 178, 130, 0.12);
+      --text-main: #f0fdf4;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --font-latin: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-arabic: 'Readex Pro', 'Amiri', sans-serif;
+      --font-calligraphy: 'Amiri', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-latin);
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body[dir="rtl"] {
+      font-family: var(--font-arabic);
+    }
+
+    /* Ambient Background Arabesque & Stardust */
+    .ambient-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle at 50% 15%, #0e2920 0%, #040908 65%);
+    }
+
+    /* Glassmorphism Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(4, 9, 8, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(56, 178, 130, 0.15);
+      z-index: 100;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(245, 199, 103, 0.4);
+      box-shadow: 0 0 15px var(--emerald-glow);
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--gold-bright);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-title span {
+      font-family: var(--font-calligraphy);
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--text-main);
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      background: rgba(13, 27, 23, 0.85);
+      padding: 4px;
+      border-radius: 30px;
+      border: 1px solid var(--card-border);
+      gap: 4px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      font-family: inherit;
+    }
+
+    .lang-btn.active, .lang-btn:hover {
+      background: linear-gradient(135deg, rgba(56, 178, 130, 0.35), rgba(245, 199, 103, 0.25));
+      color: var(--gold-bright);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Main Container */
+    main {
+      position: relative;
+      z-index: 10;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 120px 24px 60px;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      padding: 40px 0 60px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      background: var(--emerald-subtle);
+      border: 1px solid rgba(56, 178, 130, 0.35);
+      color: var(--emerald);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      box-shadow: 0 0 20px rgba(56, 178, 130, 0.15);
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--gold-bright) 75%, var(--emerald) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    body[dir="rtl"] .hero-title {
+      font-family: var(--font-arabic);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .hero-subtitle {
+      max-width: 760px;
+      margin: 0 auto 36px;
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* CTA Buttons */
+    .cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, #f5c767 0%, #e0aa3e 100%);
+      color: #040908;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(245, 199, 103, 0.35);
+      transition: var(--transition-smooth);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(245, 199, 103, 0.55);
+      background: linear-gradient(135deg, #ffe28a 0%, #f5c767 100%);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      border-radius: 40px;
+      background: rgba(13, 27, 23, 0.85);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 1.02rem;
+      text-decoration: none;
+      border: 1px solid var(--card-border);
+      transition: var(--transition-smooth);
+      backdrop-filter: blur(12px);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold-bright);
+      background: rgba(20, 45, 38, 0.9);
+      transform: translateY(-2px);
+    }
+
+    /* Specs Pills under Hero */
+    .hero-specs {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      font-family: var(--font-mono);
+      margin-bottom: 50px;
+    }
+
+    .hero-specs span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+    }
+
+    /* Hero Banner Showcase */
+    .hero-banner-frame {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(245, 199, 103, 0.25);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 178, 130, 0.25);
+      margin-bottom: 80px;
+      background: #000;
+    }
+
+    .hero-banner-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-banner-frame:hover img {
+      transform: scale(1.015);
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto 50px;
+    }
+
+    .section-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .section-desc {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Philosophy Callout Card */
+    .philosophy-card {
+      background: linear-gradient(145deg, rgba(16, 36, 30, 0.85), rgba(8, 19, 16, 0.95));
+      border: 1px solid rgba(245, 199, 103, 0.3);
+      border-radius: 28px;
+      padding: 48px;
+      margin-bottom: 90px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), inset 0 0 35px rgba(56, 178, 130, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy-card::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(245, 199, 103, 0.05) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 36px;
+    }
+
+    .context-item {
+      background: rgba(4, 12, 10, 0.55);
+      border: 1px solid rgba(56, 178, 130, 0.2);
+      border-radius: 20px;
+      padding: 26px;
+      transition: var(--transition-smooth);
+    }
+
+    .context-item:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .context-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .context-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--gold-bright);
+      margin-bottom: 10px;
+    }
+
+    .context-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* Feature Grid (Cupertino Frosted Cards) */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-bottom: 90px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 36px 32px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: var(--transition-smooth);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .feature-card:hover {
+      border-color: var(--gold);
+      background: rgba(18, 40, 34, 0.85);
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 178, 130, 0.2);
+    }
+
+    .feature-icon-box {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(56, 178, 130, 0.25), rgba(245, 199, 103, 0.2));
+      border: 1px solid rgba(245, 199, 103, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 22px;
+      color: var(--gold-bright);
+    }
+
+    .feature-card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .feature-card-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    /* Video Showcase Section */
+    .video-showcase-section {
+      background: rgba(8, 20, 16, 0.75);
+      border: 1px solid var(--card-border);
+      border-radius: 32px;
+      padding: 60px 30px;
+      margin-bottom: 90px;
+      text-align: center;
+      backdrop-filter: blur(16px);
+    }
+
+    .video-wrapper {
+      max-width: 420px;
+      margin: 0 auto;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 2px solid rgba(245, 199, 103, 0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--emerald-glow);
+      background: #000;
+      position: relative;
+      aspect-ratio: 9 / 16;
+    }
+
+    .video-wrapper iframe, .video-wrapper video {
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+      display: block;
+      border: none;
+    }
+
+    /* Screenshots Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin-bottom: 90px;
+    }
+
+    .gallery-item {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transition: var(--transition-smooth);
+      background: #000;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 30px var(--emerald-glow);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .gallery-caption {
+      padding: 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--gold-bright);
+      background: rgba(13, 27, 23, 0.9);
+      border-top: 1px solid var(--card-border);
+    }
+
+    /* Tech Stack Architecture Pill Strip */
+    .tech-strip {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 80px;
+    }
+
+    .tech-badge {
+      background: rgba(13, 27, 23, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tech-badge strong {
+      color: var(--gold-bright);
+    }
+
+    /* Download Banner Footer CTA */
+    .download-card {
+      background: linear-gradient(135deg, #0d2920 0%, #061510 100%);
+      border: 2px solid var(--gold);
+      border-radius: 32px;
+      padding: 60px 40px;
+      text-align: center;
+      margin-bottom: 60px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 50px rgba(245, 199, 103, 0.2);
+    }
+
+    .download-card h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 16px;
+      color: #fff;
+    }
+
+    .download-card p {
+      max-width: 600px;
+      margin: 0 auto 36px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(56, 178, 130, 0.15);
+      padding: 40px 5%;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 0 4%;
+        height: 68px;
+      }
+      .brand-title span {
+        display: none;
+      }
+      .philosophy-card {
+        padding: 30px 20px;
+      }
+      .download-card {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Dynamic Canvas -->
+  <div class="ambient-canvas"></div>
+
+  <!-- Top Glass Navigation -->
+  <header>
+    <a href="#" class="brand-wrap">
+      <img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="Sakina Icon" class="brand-logo" />
+      <div class="brand-title">SAKINA <span>• سكينة</span></div>
+    </a>
+
+    <!-- Language Switcher (EN, AR, FR) -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">🇬🇧 EN</button>
+      <button class="lang-btn" onclick="setLang('ar')">🇸🇦 العربية</button>
+      <button class="lang-btn" onclick="setLang('fr')">🇫🇷 FR</button>
+    </div>
+  </header>
+
+  <!-- Main Showcase Content -->
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-badge" id="heroBadge">✦ The Mindful Islamic Prayer Timepiece</div>
+      <h1 class="hero-title" id="heroTitle">Pure Serenity in Every Prayer</h1>
+      <p class="hero-subtitle" id="heroSubtitle">
+        An ultra-lightweight Android prayer timepiece crafted in 100% Jetpack Compose. Featuring a 3D Astrolabe horology dial, gentle nature chimes, zero background battery drain, and complete offline privacy.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="cta-group">
+        <a href="Sakina-v1.0-debug.apk" class="btn-primary" id="btnDownload">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span id="txtDownload">Download APK (v1.0)</span>
+        </a>
+        <a href="https://github.com/nourkim/pureprayer-sakina" target="_blank" class="btn-secondary">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span id="txtGithub">GitHub Repository</span>
+        </a>
+      </div>
+
+      <!-- Quick Specs Badge Strip -->
+      <div class="hero-specs">
+        <span>📦 22.1 MB APK</span>
+        <span>⚡ 100% Kotlin Compose</span>
+        <span>🔋 0% Battery Drain</span>
+        <span>🛡️ 100% Offline</span>
+        <span>✨ 120Hz Fluid</span>
+      </div>
+
+      <!-- Luxury 3D Banner Artwork -->
+      <div class="hero-banner-frame">
+        <img src="docs/assets/banner.jpg" alt="Sakina Luxury 3D Astrolabe Banner" />
+      </div>
+    </section>
+
+    <!-- Philosophy & Core Purpose Section -->
+    <section>
+      <div class="philosophy-card">
+        <div class="section-header" style="margin-bottom: 24px;">
+          <div class="section-tag" id="philoTag">THE CORE PHILOSOPHY</div>
+          <h2 class="section-title" id="philoTitle">Mindful Reminders • Respectful Serenity</h2>
+          <p class="section-desc" id="philoDesc">
+            The Adhan is a sacred, universally revered spiritual summons. In Muslim-majority lands, it echoes majestically across minarets. Yet on personal mobile devices, unexpected high-volume alarms often create unintended challenges.
+          </p>
+        </div>
+
+        <div class="philosophy-grid">
+          <div class="context-item">
+            <span class="context-icon">🏢</span>
+            <div class="context-title" id="ctx1Title">Quiet Workplaces & Meetings</div>
+            <div class="context-text" id="ctx1Text">
+              In corporate boardrooms, open offices, classrooms, or libraries, a sudden blaring mobile alarm can startle colleagues and create awkward disruptions.
+            </div>
+          </div>
+
+          <div class="context-item">
+            <span class="context-icon">🕌</span>
+            <div class="context-title" id="ctx2Title">Inside the Mosque & Congregation</div>
+            <div class="context-text" id="ctx2Text">
+              If an unsilenced mobile phone rings loudly during congregational prayer, it unintentionally disturbs worshippers and cuts through the solemn focus.
+            </div>
+          </div>
+
+          <div class="context-item">
+            <span class="context-icon">🌍</span>
+            <div class="context-title" id="ctx3Title">Living in Multicultural Societies</div>
+            <div class="context-text" id="ctx3Text">
+              For Muslims living in Western or non-Muslim majority nations, unfamiliar loud alarms on public transit or in public venues can cause awkward tension or anxiety. Sakina offers a peaceful, dignified personal reminder.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section>
+      <div class="section-header">
+        <div class="section-tag" id="featTag">INNOVATION & CRAFT</div>
+        <h2 class="section-title" id="featTitle">Built for Elegance and Peace of Mind</h2>
+        <p class="section-desc" id="featDesc">
+          Every detail was designed with purpose, blending historical Islamic astronomy with the pinnacle of modern mobile engineering.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🧭</div>
+          <h3 class="feature-card-title" id="f1Title">3D Astrolabe Horology</h3>
+          <p class="feature-card-desc" id="f1Desc">
+            A bespoke central 3D rotating dial inspired by Andalusian astrolabes, featuring a solitary golden hand with realistic drop shadow, domed sapphire crystal reflection, and a balanced 3-above / 3-below zero-scroll card layout.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🌿</div>
+          <h3 class="feature-card-title" id="f2Title">Gentle Nature Chimes (1x - 3x)</h3>
+          <p class="feature-card-desc" id="f2Desc">
+            Replaces loud sirens with calming, peaceful nature soundscapes: dawn breeze, morning birdsong, or crystal dew. Choose a single polite chime or repeat up to 3 gentle times.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🔋</div>
+          <h3 class="feature-card-title" id="f3Title">0% Background Battery Drain</h3>
+          <p class="feature-card-desc" id="f3Desc">
+            Zero persistent background services, zero continuous wakelocks. Wakes your device only at the exact prayer millisecond using native Android <code>AlarmManager.setExactAndAllowWhileIdle</code>.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🛡️</div>
+          <h3 class="feature-card-title" id="f4Title">100% Offline & Private</h3>
+          <p class="feature-card-desc" id="f4Desc">
+            Calculates prayer times mathematically on-device using high-precision Jean Meeus astronomical algorithms. Zero tracking, zero analytics, zero data sent over the network.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🎨</div>
+          <h3 class="feature-card-title" id="f5Title">Cupertino Frosted Glass UI</h3>
+          <p class="feature-card-desc" id="f5Desc">
+            Award-winning iOS-style translucent glass aesthetic with rich themes: Rawdah Emerald Green and Midnight Sky Blue, rendering at a fluid 120Hz.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🌐</div>
+          <h3 class="feature-card-title" id="f6Title">Universal Coordinate Geometry</h3>
+          <p class="feature-card-desc" id="f6Desc">
+            Clock dial stations remain firmly anchored in fixed astronomical positions across all languages, while center information dynamically adapts to Arabic RTL and system locales.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Official Video Showcase -->
+    <section class="video-showcase-section">
+      <div class="section-header" style="margin-bottom: 30px;">
+        <div class="section-tag" id="vidTag">OFFICIAL SHOWCASE</div>
+        <h2 class="section-title" id="vidTitle">Watch Sakina in Action</h2>
+        <p class="section-desc" id="vidDesc">
+          A high-definition vertical showcase detailing the horology, philosophy, and engineering behind Sakina.
+        </p>
+      </div>
+
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/1jtjFadUEfA?rel=0&modestbranding=1" 
+          title="Sakina Official Showcase" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div style="margin-top: 18px;">
+        <a href="https://www.youtube.com/shorts/1jtjFadUEfA" target="_blank" style="color: var(--gold-bright); text-decoration: none; font-weight: 600; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <span id="txtWatchYt">Watch directly on YouTube</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Screenshots Gallery -->
+    <section>
+      <div class="section-header">
+        <div class="section-tag" id="galTag">INTERFACE SHOWCASE</div>
+        <h2 class="section-title" id="galTitle">Visual Perfection on Any Display</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="docs/assets/screenshot_emerald_main.jpg" alt="Emerald 3+3 Prayer Cards Layout" />
+          <div class="gallery-caption" id="cap1">Rawdah Emerald • 3+3 Balanced Stage</div>
+        </div>
+        <div class="gallery-item">
+          <img src="docs/assets/screenshot_night_main.jpg" alt="Midnight Theme" />
+          <div class="gallery-caption" id="cap2">Midnight Sky • Deep Serenity</div>
+        </div>
+        <div class="gallery-item">
+          <img src="docs/assets/screenshot_emerald_round.jpg" alt="3D Astrolabe Dial Focus" />
+          <div class="gallery-caption" id="cap3">3D Astrolabe Dial & Domed Sapphire Lens</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technology & Architecture Pill Strip -->
+    <div class="tech-strip">
+      <div class="tech-badge"><span>⚡</span><strong>Kotlin</strong> 2.0.21</div>
+      <div class="tech-badge"><span>🎨</span><strong>Jetpack Compose</strong> 1.7.5</div>
+      <div class="tech-badge"><span>🤖</span><strong>Android 8.0+</strong> (API 26+)</div>
+      <div class="tech-badge"><span>⏰</span><strong>AlarmManager</strong> Exact Alarms</div>
+      <div class="tech-badge"><span>🌌</span><strong>Jean Meeus</strong> Astronomy</div>
+      <div class="tech-badge"><span>📄</span><strong>MIT</strong> Open Source</div>
+    </div>
+
+    <!-- Final Call to Action Download Card -->
+    <section>
+      <div class="download-card">
+        <h2 id="ctaTitle">Ready to Experience True Serenity?</h2>
+        <p id="ctaDesc">
+          Download Sakina today directly from GitHub. Completely free, open source, and respectful of your peace of mind and battery life.
+        </p>
+        <div class="cta-group" style="margin-bottom: 0;">
+          <a href="Sakina-v1.0-debug.apk" class="btn-primary" style="font-size: 1.15rem; padding: 18px 44px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span id="txtDownloadFooter">Download Sakina-v1.0-debug.apk</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <strong>Sakina (سكينة) • Pure Prayer</strong> — Designed with dedication, precision, and tranquility.<br/>
+      Licensed under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>. Repository on <a href="https://github.com/nourkim/pureprayer-sakina" target="_blank">GitHub</a>.
+    </p>
+  </footer>
+
+  <!-- Multilingual Dictionary Script -->
+  <script>
+    const i18n = {
+      en: {
+        dir: 'ltr',
+        heroBadge: '✦ The Mindful Islamic Prayer Timepiece',
+        heroTitle: 'Pure Serenity in Every Prayer',
+        heroSubtitle: 'An ultra-lightweight Android prayer timepiece crafted in 100% Jetpack Compose. Featuring a 3D Astrolabe horology dial, gentle nature chimes, zero background battery drain, and complete offline privacy.',
+        txtDownload: 'Download APK (v1.0)',
+        txtGithub: 'GitHub Repository',
+        philoTag: 'THE CORE PHILOSOPHY',
+        philoTitle: 'Mindful Reminders • Respectful Serenity',
+        philoDesc: 'The Adhan is a sacred, universally revered spiritual summons. In Muslim-majority lands, it echoes majestically across minarets. Yet on personal mobile devices, unexpected high-volume alarms often create unintended challenges.',
+        ctx1Title: 'Quiet Workplaces & Meetings',
+        ctx1Text: 'In corporate boardrooms, open offices, classrooms, or libraries, a sudden blaring mobile alarm can startle colleagues and create awkward disruptions.',
+        ctx2Title: 'Inside the Mosque & Congregation',
+        ctx2Text: 'If an unsilenced mobile phone rings loudly during congregational prayer, it unintentionally disturbs worshippers and cuts through the solemn focus.',
+        ctx3Title: 'Living in Multicultural Societies',
+        ctx3Text: 'For Muslims living in Western or non-Muslim majority nations, unfamiliar loud alarms on public transit or in public venues can cause awkward tension or anxiety. Sakina offers a peaceful, dignified personal reminder.',
+        featTag: 'INNOVATION & CRAFT',
+        featTitle: 'Built for Elegance and Peace of Mind',
+        featDesc: 'Every detail was designed with purpose, blending historical Islamic astronomy with the pinnacle of modern mobile engineering.',
+        f1Title: '3D Astrolabe Horology',
+        f1Desc: 'A bespoke central 3D rotating dial inspired by Andalusian astrolabes, featuring a solitary golden hand with realistic drop shadow, domed sapphire crystal reflection, and a balanced 3-above / 3-below zero-scroll card layout.',
+        f2Title: 'Gentle Nature Chimes (1x - 3x)',
+        f2Desc: 'Replaces loud sirens with calming, peaceful nature soundscapes: dawn breeze, morning birdsong, or crystal dew. Choose a single polite chime or repeat up to 3 gentle times.',
+        f3Title: '0% Background Battery Drain',
+        f3Desc: 'Zero persistent background services, zero continuous wakelocks. Wakes your device only at the exact prayer millisecond using native Android AlarmManager.setExactAndAllowWhileIdle.',
+        f4Title: '100% Offline & Private',
+        f4Desc: 'Calculates prayer times mathematically on-device using high-precision Jean Meeus astronomical algorithms. Zero tracking, zero analytics, zero data sent over the network.',
+        f5Title: 'Cupertino Frosted Glass UI',
+        f5Desc: 'Award-winning iOS-style translucent glass aesthetic with rich themes: Rawdah Emerald Green and Midnight Sky Blue, rendering at a fluid 120Hz.',
+        f6Title: 'Universal Coordinate Geometry',
+        f6Desc: 'Clock dial stations remain firmly anchored in fixed astronomical positions across all languages, while center information dynamically adapts to Arabic RTL and system locales.',
+        vidTag: 'OFFICIAL SHOWCASE',
+        vidTitle: 'Watch Sakina in Action',
+        vidDesc: 'A high-definition vertical showcase detailing the horology, philosophy, and engineering behind Sakina.',
+        galTag: 'INTERFACE SHOWCASE',
+        galTitle: 'Visual Perfection on Any Display',
+        cap1: 'Rawdah Emerald • 3+3 Balanced Stage',
+        cap2: 'Midnight Sky • Deep Serenity',
+        cap3: '3D Astrolabe Dial & Domed Sapphire Lens',
+        ctaTitle: 'Ready to Experience True Serenity?',
+        ctaDesc: 'Download Sakina today directly from GitHub. Completely free, open source, and respectful of your peace of mind and battery life.',
+        txtDownloadFooter: 'Download Sakina-v1.0-debug.apk (22.1 MB)',
+        txtWatchYt: 'Watch directly on YouTube'
+      },
+      ar: {
+        dir: 'rtl',
+        heroBadge: '✦ ساعة المواقيت الفلكية ذات الطابع الإسلامي الفاخر',
+        heroTitle: 'سكينة وطمأنينة في كل صلاة',
+        heroSubtitle: 'تطبيق أندرويد فائق الخفة تم بناؤه بنسبة 100% بأحدث تقنيات Jetpack Compose. يجمع بين ساعة أسطرلاب فلكية ثلاثية الأبعاد، وتنبيهات طبيعية هادئة، وانعدام استهلاك البطارية في الخلفية مع خصوصية كاملة بدون إنترنت.',
+        txtDownload: 'تحميل التطبيق (APK v1.0)',
+        txtGithub: 'المستودع على GitHub',
+        philoTag: 'فلسفة التطبيق النبيلة',
+        philoTitle: 'تذكير لطيف • وسكينة تحفظ وقار الموقف',
+        philoDesc: 'الأذان شعيرة إسلامية مباركة ونداء روحي جليل له مكانته العظيمة في قلوب المسلمين، ويصدح خاشعاً من المآذن في بلداننا الإسلامية. لكن في الحياة اليومية مع الهواتف الذكية، تنشأ تحديات ومواقف محرجة تتطلب حلولاً ذكية ومراعية.',
+        ctx1Title: 'بيئات العمل والاجتماعات الرسمية',
+        ctx1Text: 'في قاعات الاجتماعات المهمة أو المكاتب أو الجامعات، قد يرن الهاتف فجأة بصوت مرتفع جداً مما يشكل إرباكاً للمجتمعين واضطراباً في جو العمل.',
+        ctx2Title: 'داخل المسجد وأثناء إقامة الصلاة',
+        ctx2Text: 'إذا لم يكن الهاتف مضبوطاً بدقة، فإن انطلاق صوت الهاتف المرتفع داخل المسجد أثناء صلاة الجماعة يشوش على المصلين ويقطع خشوعهم.',
+        ctx3Title: 'في بلاد الاغتراب والمجتمعات الغربية',
+        ctx3Text: 'يعيش ملايين المسلمين في بلدان غير إسلامية لا تألف سماع أصوات مرتفعة أو غير معتادة في المواصلات أو المقرات، مما قد يسبب حرجاً للمستخدم؛ وسكينة يمنحه تذكيراً هادئاً وآمناً.',
+        featTag: 'الإبداع الهندسي والجمالي',
+        featTitle: 'صُمم ليمنحك الهدوء والراحة المطلقة',
+        featDesc: 'كل تفصيلة في التطبيق صُممت بعناية لتجمع بين عبقرية علم الفلك الأندلسي وأعلى معايير البرمجة الحديثة.',
+        f1Title: 'ساعة أسطرلاب فلكية 3D',
+        f1Desc: 'ميناء مركزي ثلاثي الأبعاد مستوحى من الأسطرلاب الأندلسي، بعقرب ذهبي وحيد ذي ظل عائم واقعي، وبريق كريستالي ياقوتي محدب، وتوزيع متوازن 3 كروت بالأعلى و 3 بالأسفل.',
+        f2Title: 'نغمات طبيعية هادئة (1 إلى 3 رنات)',
+        f2Desc: 'تنبيه هادئ لطيف بدخول وقت الصلاة بنغمات طبيعية مسالمة (نسيم الفجر، زقزقة الطيور، قطرات الندى) عبر رنة واحدة أو تكرارها بلطف حتى 3 مرات دون أي صخب.',
+        f3Title: '0% استهلاك للبطارية في الخلفية',
+        f3Desc: 'لا توجد خدمات خلفية مستمرة أو استنزاف للطاقة. يوقظ النظام فقط عند موعد الصلاة بالمللي ثانية عبر منبهات النظام الدقيقة AlarmManager.',
+        f4Title: '100% دون إنترنت وبخصوصية تامة',
+        f4Desc: 'حسابات فلكية رياضية دقيقة محلياً وفق خوارزميات جان ميوس (Jean Meeus). لا يتم إرسال أي بايت واحد لخوادم خارجية، ولا توجد أي إعلانات أو تتبع.',
+        f5Title: 'واجهة زجاجية بنمط Cupertino الفاخر',
+        f5Desc: 'تصميم زجاجي بلوري فائق الجمال مستوحى من أنظمة iOS، بثيمات متألقة (زمرد الروضة الشريفة وليل القدر)، بمعدل إطارات فائق السلاسة 120Hz.',
+        f6Title: 'ثبات هندسي فلكي في كل اللغات',
+        f6Desc: 'تبقى مواضع الصلوات الست ومسار دوران العقرب ثابتاً ومستقراً هندسياً عند اختيار اللغة العربية، بينما يتكيف قلب الساعة الداخلي للنصوص والعداد بسلاسة.',
+        vidTag: 'العرض الترويجي الرسمي',
+        vidTitle: 'شاهد تطبيق سكينة في دقائق',
+        vidDesc: 'فيديو احترافي عالي الدقة بمقاس عمودي يستعرض فلسفة التطبيق، جمالية ساعته الفلكية، ودقة أدائه الهندسي.',
+        galTag: 'معرض واجهات التطبيق',
+        galTitle: 'جمال بصري فائق على جميع الشاشات',
+        cap1: 'ثيم الزمرد • توزيع متوازن 3 بالأعلى و 3 بالأسفل',
+        cap2: 'ثيم ليل القدر • صفاء وهدوء ليلي',
+        cap3: 'ساعة الأسطرلاب المحدبة ثلاثية الأبعاد',
+        ctaTitle: 'هل أنت جاهز لتجربة السكينة الحقيقية؟',
+        ctaDesc: 'حمل تطبيق سكينة الآن مباشرة من GitHub. مجاني تماماً، مفتوح المصدر، ويحفظ هدوءك وطاقة بطاريتك.',
+        txtDownloadFooter: 'تحميل ملف Sakina-v1.0-debug.apk (22.1 MB)',
+        txtWatchYt: 'مشاهدة الفيديو مباشرة على YouTube'
+      },
+      fr: {
+        dir: 'ltr',
+        heroBadge: '✦ Horlogerie Islamique de Sérénité et de Pleine Conscience',
+        heroTitle: 'La Pure Sérénité à Chaque Prière',
+        heroSubtitle: 'Une montre astronomique Android ultra-légère conçue à 100% avec Jetpack Compose. Avec son cadran astrolabe 3D, ses carillons naturels apaisants, zéro consommation de batterie en arrière-plan et un respect total de la vie privée hors-ligne.',
+        txtDownload: 'Télécharger APK (v1.0)',
+        txtGithub: 'Dépôt GitHub',
+        philoTag: 'NOTRE PHILOSOPHIE',
+        philoTitle: 'Un Rappel Subtil • La Paix et le Respect',
+        philoDesc: 'L\'Adhan est un appel sacré et vénéré qui résonne majestueusement dans les pays musulmans. Cependant, sur nos smartphones personnels au quotidien, des alarmes soudaines à plein volume posent souvent d\'inutiles difficultés.',
+        ctx1Title: 'Environnements de Travail & Réunions',
+        ctx1Text: 'Dans les réunions de travail, bureaux partagés, bibliothèques ou salles de cours, une alerte tonitruante perturbe l\'assemblée et crée un embarras évitable.',
+        ctx2Title: 'À la Mosquée & Pendant l\'Office',
+        ctx2Text: 'Si un téléphone n\'est pas silencieux, une sonnerie forte au milieu de la prière collective brise le recueillement profond des fidèles.',
+        ctx3Title: 'Vivre en Milieu Multiculturel',
+        ctx3Text: 'Pour les musulmans vivant en Occident, une alerte inaccoutumée dans les transports ou l\'espace public peut susciter l\'incompréhension. Sakina offre un rappel personnel, doux et discret.',
+        featTag: 'INNOVATION & HORLOGERIE',
+        featTitle: 'Conçu pour l\'Élégance et la Tranquillité',
+        featDesc: 'Chaque détail marie l\'héritage de l\'astronomie andalouse à l\'excellence du développement mobile contemporain.',
+        f1Title: 'Horlogerie Astrolabe 3D',
+        f1Desc: 'Un cadran central rotatif inspiré des astrolabes médiévaux, doté d\'une aiguille dorée flottante avec ombre portée, reflet bombé en verre saphir, et une disposition équilibrée 3+3 sans aucun défilement.',
+        f2Title: 'Carillons Naturels Doux (1x à 3x)',
+        f2Desc: 'Remplace les alarmes stridentes par des atmosphères apaisantes : brise de l\'aube, chant d\'oiseaux ou rosée. Une sonnerie unique ou répétée avec délicatesse jusqu\'à 3 fois.',
+        f3Title: 'Zéro Consommation de Batterie',
+        f3Desc: 'Aucun service persistant en arrière-plan, aucun wakelock énergivore. Réveille le téléphone uniquement à la milliseconde exacte grâce à l\'API native AlarmManager.',
+        f4Title: '100% Hors-Ligne & Confidentiel',
+        f4Desc: 'Calculs astronomiques locaux haute précision (formules de Jean Meeus). Aucun traqueur, aucune donnée transmise sur le réseau.',
+        f5Title: 'Design Cupertino Verre Dépoli',
+        f5Desc: 'Une esthétique contemporaine en verre translucide dépoli avec thèmes élégants : Vert Émeraude Rawdah et Nuit Étoilée, cadencée à 120Hz.',
+        f6Title: 'Géométrie Universelle Invariable',
+        f6Desc: 'Les coordonnées des six prières restent rigoureusement stables dans toutes les langues, tandis que le centre s\'adapte aux textes arabes ou latins.',
+        vidTag: 'PRÉSENTATION OFFICIELLE',
+        vidTitle: 'Découvrez Sakina en Vidéo',
+        vidDesc: 'Une vidéo verticale haute définition détaillant l\'horlogerie, la philosophie et la technologie de Sakina.',
+        galTag: 'GALERIE DE L\'INTERFACE',
+        galTitle: 'Une Pureté Visuelle sur Tout Écran',
+        cap1: 'Vert Émeraude • Disposition 3+3 Équilibrée',
+        cap2: 'Nuit Étoilée • Profonde Sérénité',
+        cap3: 'Cadran Astrolabe 3D & Verre Saphir Bombé',
+        ctaTitle: 'Prêt à Découvrir la Vraie Sérénité ?',
+        ctaDesc: 'Téléchargez Sakina dès maintenant sur GitHub. Gratuit, open source, respectueux de votre tranquillité et de votre batterie.',
+        txtDownloadFooter: 'Télécharger Sakina-v1.0-debug.apk (22.1 MB)',
+        txtWatchYt: 'Regarder directement sur YouTube'
+      }
+    };
+
+    function setLang(lang) {
+      const data = i18n[lang];
+      if (!data) return;
+
+      document.documentElement.lang = lang;
+      document.documentElement.dir = data.dir;
+      document.body.setAttribute('dir', data.dir);
+
+      // Update switcher active state
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('onclick').includes(lang));
+      });
+
+      // Update all translated elements
+      for (const [id, val] of Object.entries(data)) {
+        if (id === 'dir') continue;
+        const el = document.getElementById(id);
+        if (el) {
+          el.innerText = val;
+        }
+      }
+
+      localStorage.setItem('sakina_lang', lang);
+    }
+
+    // Auto-detect or restore preferred language
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('sakina_lang');
+      if (saved && i18n[saved]) {
+        setLang(saved);
+      } else {
+        const navLang = (navigator.language || '').toLowerCase();
+        if (navLang.startsWith('ar')) setLang('ar');
+        else if (navLang.startsWith('fr')) setLang('fr');
+        else setLang('en');
+      }
+    });
+  </script>
+</body>
+</html>
